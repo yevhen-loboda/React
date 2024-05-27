@@ -27,14 +27,16 @@ import {Provider} from 'react-redux';
     // )
   }
 
-renderEntireTree(store.getState());
+  renderEntireTree();
+
+// renderEntireTree(store.getState());
 
 // store.subscribe(renderEntireTree);
 
-store.subscribe(() => {
-  let state = store.getState();
-  renderEntireTree(state)
-});
+// store.subscribe(() => {
+//   let state = store.getState();
+//   renderEntireTree(state)
+// });
 
 
 // If you want to start measuring performance in your app, pass a function

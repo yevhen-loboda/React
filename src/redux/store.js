@@ -60,6 +60,87 @@ import matches from "./matches";
   }
 
   let statistic = totalMore(matches);
+
+  function matchesFormula(procentMore, procentLess) {
+    let homeMatches = matches.filter(item => (item.homeTeamMoreProcent>=procentMore && item.homeTeamMoreProcent<procentLess));
+    let homeMatchesMore = homeMatches.filter(item => item.homeResult > item.homeTotal);
+    let procentHomeMore = Math.round((homeMatchesMore.length/homeMatches.length)*100);
+    // console.log(homeMatches,"homeMatches")
+    // console.log(homeMatchesMore,"homeMatchesMore")
+    console.log(procentHomeMore,"procentHomeMore")
+
+    let guestMatches = matches.filter(item => (item.guestTeamMoreProcent>=procentMore && item.guestTeamMoreProcent<procentLess));
+    let guestMatchesMore = guestMatches.filter(item => item.guestResult > item.guestTotal);
+    let procentGuestMore = Math.round((guestMatchesMore.length/guestMatches.length)*100);
+    // console.log(guestMatches,"guestMatches")
+    // console.log(guestMatchesMore,"guestMatchesMore")
+    console.log(procentGuestMore,"procentGuestMore")
+
+    let sumProcentHomeMatches = matches.filter(item => item.homeTeamMoreProcent>=0);
+
+    // console.log(sumProcentHomeMatches,"sumProcentHomeMatches")
+
+    let middleProcentHomeMatches= matches.filter(item => 
+       (item.middleProcentHomeMore>=procentMore && item.middleProcentHomeMore<procentLess));
+    let middleProcentHomeMoreMatches = middleProcentHomeMatches.filter(item => item.guestResult > item.guestTotal);
+    let procentMiddleHomeMore = Math.round((middleProcentHomeMoreMatches.length/middleProcentHomeMatches.length)*100);
+    // console.log(middleProcentHomeMatches,"middleProcentHomeMatches")
+    // console.log(middleProcentHomeMoreMatches,"middleProcentHomeMoreMatches")
+    console.log(procentMiddleHomeMore,"procentMiddleHomeMore")
+
+    let middleProcentGuestMatches= matches.filter(item => 
+       (item.middleProcentGuestMore>=procentMore && item.middleProcentGuestMore<procentLess));
+    let middleProcentGuestMoreMatches = middleProcentGuestMatches.filter(item => item.guestResult > item.guestTotal);
+    let procentMiddleGuestMore = Math.round((middleProcentGuestMoreMatches.length/middleProcentGuestMatches.length)*100);
+    // console.log(middleProcentGuestMatches,"middleProcentGuestMatches")
+    // console.log(middleProcentGuestMoreMatches,"middleProcentGuestMoreMatches")
+    console.log(procentMiddleGuestMore,"procentMiddleGuestMore")
+
+    let middleHomePoints= matches.filter(item => 
+        (item.middleTotalHome));
+     let middleHomePointsMore = middleHomePoints.filter(item => (item.homeResult > item.homeTotal && item.middleTotalHome>item.homeTotal));
+    //  let procentMiddleGuestMore = Math.round((middleProcentGuestMoreMatches.length/middleProcentGuestMatches.length)*100);
+    //  console.log(middleHomePoints,"middleHomePoints")
+    //  console.log(middleHomePointsMore,"middleHomePointsMore")
+    //  console.log(procentMiddleGuestMore,"procentMiddleGuestMore")
+    
+    // return procentHomeMore;
+
+    let results = {
+      procentHomeMore: procentHomeMore,
+      procentGuestMore: procentGuestMore,
+      procentMiddleHomeMore: procentMiddleHomeMore,
+      procentMiddleGuestMore: procentMiddleGuestMore
+  }
+
+  return results;
+  }
+
+  let statisticProcent = {
+    procent0_10: matchesFormula(0,10),
+    procent10_20: matchesFormula(10,20),
+    procent20_30: matchesFormula(20,30),
+    procent30_40: matchesFormula(30,40),
+    procent40_50: matchesFormula(40,50),
+    procent50_60: matchesFormula(50,60),
+    procent60_70: matchesFormula(60,70),
+    procent70_80: matchesFormula(70,80),
+    procent80_90: matchesFormula(80,90),
+    procent90_100: matchesFormula(90,100),
+    procent100_101: matchesFormula(100,101),
+  }
+
+  console.log(matchesFormula(0,10), "0-10")
+  console.log(matchesFormula(10,20), "10-20")
+  console.log(matchesFormula(20,30), "20-30")
+  console.log(matchesFormula(30,40), "30-40")
+  console.log(matchesFormula(40,50), "40-50")
+  console.log(matchesFormula(50,60), "50-60")
+  console.log(matchesFormula(60,70), "60-70")
+  console.log(matchesFormula(70,80), "70-80")
+  console.log(matchesFormula(80,90), "80-90")
+  console.log(matchesFormula(90,100), "90-100")
+  console.log(matchesFormula(100,101), "100-101")
   
   function teamMore(id, total) {
   
@@ -145,6 +226,7 @@ let store = {
             {id: 30, name: 'Washington', logo: 'https://th.bing.com/th/id/OIP.F7taCj5V5nEClt_W1hPMWQHaHa?w=168&h=180&c=7&r=0&o=5&pid=1.7', homeMore: homeMore(30), guestMore: guestMore(30), homeEnemy: homeEnemy(30), guestEnemy: guestEnemy(30), middleHomePoints: middleHomePoints(30), middleGuestPoints: middleGuestPoints(30), middleHomeEnemyPoints: middleHomeEnemyPoints(30), middleGuestEnemyPoints: middleGuestEnemyPoints(30)},
           ],
           statistic: statistic,
+          statisticProcent: statisticProcent
     }
       
   },
@@ -245,52 +327,7 @@ let store = {
 
 
    
-  function matchesFormula() {
-    let homeMatches = matches.filter(item => (item.homeTeamMoreProcent>55 && item.homeTeamMoreProcent<65));
-    let homeMatchesMore = homeMatches.filter(item => item.homeResult > item.homeTotal);
-    let procentHomeMore = Math.round((homeMatchesMore.length/homeMatches.length)*100);
-    // console.log(homeMatches,"homeMatches")
-    // console.log(homeMatchesMore,"homeMatchesMore")
-    console.log(procentHomeMore,"procentHomeMore")
+ 
 
-    let guestMatches = matches.filter(item => (item.guestTeamMoreProcent>65 && item.guestTeamMoreProcent<70));
-    let guestMatchesMore = guestMatches.filter(item => item.guestResult > item.guestTotal);
-    let procentGuestMore = Math.round((guestMatchesMore.length/guestMatches.length)*100);
-    // console.log(guestMatches,"guestMatches")
-    // console.log(guestMatchesMore,"guestMatchesMore")
-    console.log(procentGuestMore,"procentGuestMore")
-
-    let sumProcentHomeMatches = matches.filter(item => item.homeTeamMoreProcent>=0);
-
-    // console.log(sumProcentHomeMatches,"sumProcentHomeMatches")
-
-    let middleProcentHomeMatches= matches.filter(item => 
-       (item.middleProcentHomeMore>65 && item.middleProcentHomeMore<75));
-    let middleProcentHomeMoreMatches = middleProcentHomeMatches.filter(item => item.guestResult > item.guestTotal);
-    let procentMiddleHomeMore = Math.round((middleProcentHomeMoreMatches.length/middleProcentHomeMatches.length)*100);
-    // console.log(middleProcentHomeMatches,"middleProcentHomeMatches")
-    // console.log(middleProcentHomeMoreMatches,"middleProcentHomeMoreMatches")
-    console.log(procentMiddleHomeMore,"procentMiddleHomeMore")
-
-    let middleProcentGuestMatches= matches.filter(item => 
-       (item.middleProcentGuestMore>65 && item.middleProcentGuestMore<70));
-    let middleProcentGuestMoreMatches = middleProcentGuestMatches.filter(item => item.guestResult > item.guestTotal);
-    let procentMiddleGuestMore = Math.round((middleProcentGuestMoreMatches.length/middleProcentGuestMatches.length)*100);
-    // console.log(middleProcentGuestMatches,"middleProcentGuestMatches")
-    // console.log(middleProcentGuestMoreMatches,"middleProcentGuestMoreMatches")
-    console.log(procentMiddleGuestMore,"procentMiddleGuestMore")
-
-    let middleHomePoints= matches.filter(item => 
-        (item.middleTotalHome));
-     let middleHomePointsMore = middleHomePoints.filter(item => (item.homeResult > item.homeTotal && item.middleTotalHome>item.homeTotal));
-    //  let procentMiddleGuestMore = Math.round((middleProcentGuestMoreMatches.length/middleProcentGuestMatches.length)*100);
-     console.log(middleHomePoints,"middleHomePoints")
-     console.log(middleHomePointsMore,"middleHomePointsMore")
-    //  console.log(procentMiddleGuestMore,"procentMiddleGuestMore")
-    
-    return procentHomeMore;
-  }
-
-  matchesFormula();
 
   export default store;

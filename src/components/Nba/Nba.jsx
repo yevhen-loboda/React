@@ -16,8 +16,8 @@ const Nba = () => {
     <div>
       {teamsElements}
     </div>
-    <div>
-      <Matches statistic={state.nbaPage.statistic} />
+    <div className={s.item}>
+      <Matches  statistic={state.nbaPage.statistic} statisticProcent={state.nbaPage.statisticProcent}/>
     </div>
   </div>
 }
