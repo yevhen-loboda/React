@@ -6,25 +6,21 @@ import store  from './redux/redux-store';
 // import store  from './redux/store'
 import { BrowserRouter } from 'react-router-dom';
 import {Provider} from 'react-redux';
+import SamuraiJSApp from './App';
 
  let renderEntireTree = (state) => {
 
     const root = ReactDOM.createRoot(document.getElementById('root'));
     root.render(
-      <BrowserRouter>
-      <React.StrictMode>
-        <Provider store={store}>
-        {/* <App state={store.getState()} dispatch={store.dispatch.bind(store)} store={store}/> */}
-        <App />
-        </Provider>
-      </React.StrictMode>
-      </BrowserRouter>
+      // <BrowserRouter>
+      // <React.StrictMode>
+      //   <Provider store={store}>
+      //   <App />
+      //   </Provider>
+      // </React.StrictMode>
+      // </BrowserRouter>
+<SamuraiJSApp />
     )
-    // ReactDOM.render(
-    //   <BrowserRouter>
-    //     <App state={store.getState()} dispatch={store.dispatch.bind(store)}/>
-    //   </BrowserRouter>, document.getElementById('root')
-    // )
   }
 
   renderEntireTree();
